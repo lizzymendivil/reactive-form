@@ -1,0 +1,61 @@
+<div class="container">
+    <h1 class="text-center">Reactive Forms with Angular 8</h1>
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': f.name.touched && f.name.errors }">
+            <div class="invalid-feedback" *ngIf="f.name.touched && f.name.errors">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Lastname</label>
+            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }">
+            <div class="invalid-feedback" *ngIf="f.lastName.touched && f.lastName.errors">
+                <div *ngIf="f.lastName.errors.required">Lastname is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="userName">Username</label>
+            <input type="text" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': f.userName.touched && f.userName.errors }">
+            <div class="invalid-feedback" *ngIf="f.userName.touched && f.userName.errors">
+                <div *ngIf="f.userName.errors.required">Username is required</div>
+                <div *ngIf="f.userName.errors.minlength">Username must be at least 5 characters long</div>
+                <div *ngIf="f.userName.errors.maxlength">Username cannot be more than 20 characters long</div>
+                <div *ngIf="f.userName.errors.pattern">Username must contain only numbers and letters</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': f.age.touched && f.age.errors }">
+            <div class="invalid-feedback" *ngIf="f.age.touched && f.age.errors">
+                <div *ngIf="f.age.errors.required">Age is required</div>
+                <div *ngIf="f.age.errors.ageRange">Age must be in between {{ MIN_AGE }} and {{ MAX_AGE }}</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }">
+            <div class="invalid-feedback" *ngIf="f.email.touched && f.email.errors">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.pattern">Enter a valid email</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea formControlName="address" name="address" id="address" cols="30" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="website">Website</label>
+            <input type="text" formControlName="website" class="form-control" [ngClass]="{ 'is-invalid': f.website.touched && f.website.errors }">
+            <div class="invalid-feedback" *ngIf="f.website.touched && f.website.errors">
+                <div *ngIf="f.website.errors.required">Website is required</div>
+                <div *ngIf="f.website.errors.validUrl">Only URLs served over https are accepted</div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary m-1" type="submit">Save</button>
+            <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+        </div>
+    </form>
+</div>
